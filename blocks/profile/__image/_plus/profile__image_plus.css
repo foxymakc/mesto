@@ -1,0 +1,11 @@
+.profile__image_plus {
+  width: 16px;
+  height: 16px;
+}
+
+@media (min-width: 897px) {
+  .profile__image_plus {
+    width: 22px;
+    height: 22px;
+  }
+}

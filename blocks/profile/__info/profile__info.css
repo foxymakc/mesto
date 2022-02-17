@@ -1,0 +1,15 @@
+.profile__info {
+  display: flex;
+  flex-wrap: nowrap;
+  margin-top: 26px;
+  align-items: center;
+  justify-content: center;
+  margin-left: 30px;
+}
+
+@media (min-width: 897px) {
+  .profile__info {
+    margin-left: 0;
+    margin-top: 22px;
+  }
+}
