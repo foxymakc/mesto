@@ -23,23 +23,23 @@
             />
             <div class="profile__info">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
-              <button class="profile__edit-button">
+              <a href="#" class="profile__edit-button" id="popup_show">
                 <img
                   class="profile__image_pen"
                   src="./images/pen.png"
                   alt="картинка карандаша"
                 />
-              </button>
+              </a>
             </div>
             <p class="profile__subtitle">Исследователь океана</p>
           </div>
-          <button class="profile__add-button">
+          <a href="#" class="profile__add-button">
             <img
               class="profile__image_plus"
               src="./images/plus.png"
               alt="картинка плюс"
             />
-          </button>
+          </a>
         </section>
 
         <section class="elements">
@@ -51,9 +51,9 @@
             />
             <div class="element__content">
               <h2 class="element__title">Карачаевск</h2>
-              <div class="element__like">
+              <a href="#" class="element__like">
                 <img src="./images/like_disabled.png" alt="картинка лайк" />
-              </div>
+              </a>
             </div>
           </div>
           <div class="element">
@@ -64,9 +64,9 @@
             />
             <div class="element__content">
               <h2 class="element__title">Гора Эльбрус</h2>
-              <div class="element__like">
+              <a href="#" class="element__like">
                 <img src="./images/like_disabled.png" alt="картинка лайк" />
-              </div>
+              </a>
             </div>
           </div>
           <div class="element">
@@ -77,9 +77,9 @@
             />
             <div class="element__content">
               <h2 class="element__title">Домбай</h2>
-              <div class="element__like">
+              <a href="#" class="element__like">
                 <img src="./images/like_disabled.png" alt="картинка лайк" />
-              </div>
+              </a>
             </div>
           </div>
           <div class="element">
@@ -90,9 +90,9 @@
             />
             <div class="element__content">
               <h2 class="element__title">Гора Эльбрус</h2>
-              <div class="element__like">
+              <a href="#" class="element__like">
                 <img src="./images/like_disabled.png" alt="картинка лайк" />
-              </div>
+              </a>
             </div>
           </div>
           <div class="element">
@@ -103,9 +103,9 @@
             />
             <div class="element__content">
               <h2 class="element__title">Домбай</h2>
-              <div class="element__like">
+              <a href="#" class="element__like">
                 <img src="./images/like_disabled.png" alt="картинка лайк" />
-              </div>
+              </a>
             </div>
           </div>
           <div class="element">
@@ -116,11 +116,31 @@
             />
             <div class="element__content">
               <h2 class="element__title">Карачаевск</h2>
-              <div class="element__like">
+              <a href="#" class="element__like">
                 <img src="./images/like_disabled.png" alt="картинка лайк" />
-              </div>
+              </a>
             </div>
           </div>
+        </section>
+
+        <section class="popup" id="popup">
+          <form class="popup__container">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <label>
+              <input class="popup__name" type="text" value="Жак-Ив Кусто" />
+            </label>
+            <label>
+              <input
+                class="popup__about-me"
+                type="text"
+                value="Исследователь океана"
+              />
+            </label>
+            <button type="submit" class="popup__sumbit">Сохранить</button>
+            <a href="#" class="popup__close" id="popup_close">
+              <img src="./images/close_icon.png" alt="кнопка закрыть" />
+            </a>
+          </form>
         </section>
       </main>
 
@@ -128,5 +148,7 @@
         <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
       </footer>
     </div>
+
+    <script src="/scripts/index.js"></script>
   </body>
 </html>

@@ -1,0 +1,21 @@
+.popup__close {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: -36px;
+  right: 0;
+}
+
+@media (min-width: 897px) {
+  .popup__close {
+    width: 32px;
+    height: 32px;
+    top: -40px;
+    right: -40px;
+  }
+}
+
+.popup__close:hover {
+  opacity: 0.6;
+}
