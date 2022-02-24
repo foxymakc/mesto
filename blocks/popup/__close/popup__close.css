@@ -1,5 +1,9 @@
 .popup__close {
   display: flex;
+  background: transparent url(../../../images/close_icon.png) no-repeat;
+  background-position: center;
+  border: none;
+  cursor: pointer;
   width: 20px;
   height: 20px;
   position: absolute;
