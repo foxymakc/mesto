@@ -8,7 +8,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  max-width: 500px;
+  max-width: 90%;
 }
 
 @media (min-width: 897px) {

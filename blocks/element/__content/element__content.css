@@ -2,6 +2,6 @@
   display: flex;
   background-color: white;
   align-items: center;
-  height: 79px;
+  min-height: 79px;
   justify-content: space-between;
 }

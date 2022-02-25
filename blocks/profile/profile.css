@@ -3,7 +3,8 @@
   width: 282px;
   flex-direction: column;
   justify-content: center;
-  margin: 42px auto 36px;
+  align-items: center;
+  margin: 40px auto 36px;
 }
 
 @media (min-width: 897px) {

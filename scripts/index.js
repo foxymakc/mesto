@@ -15,8 +15,8 @@ function ClosePopup() {
 };
 
 let formElement = document.querySelector('.popup__container');
-let nameInput = document.querySelector('.popup__name');
-let jobInput = document.querySelector('.popup__about-me');
+let nameInput = document.querySelector('.popup__input_name');
+let jobInput = document.querySelector('.popup__input_about-me');
 let PopupSumbit = document.querySelector('.popup__sumbit');
 let ProfileTitle = document.querySelector('.profile__title');
 let ProfileSubtitle = document.querySelector('.profile__subtitle');
