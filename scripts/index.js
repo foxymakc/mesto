@@ -46,13 +46,24 @@ const initialCards = [
   },
 ];
 
+//Функция открытия любоого попап
+function openPopup(element) {
+  element.classList.add('popup_opened');
+};
+
+//Функция закрытия любоого попап
+function closePopup(element) {
+  element.classList.remove('popup_opened');
+};
+
+
 //Попап ПРОФИЛЯ
 
 //Открыть попап
 profilePopupOpenBtn.addEventListener("click", profilePopupOpen);
 
 function profilePopupOpen() {
-  profilePopup.classList.add("popup_opened");
+  openPopup(profilePopup);
   profilePopupNameInput.value = profileTitle.textContent;
   profilePopupJobInput.value = profileSubtitle.textContent;
 }
@@ -61,7 +72,7 @@ function profilePopupOpen() {
 profilePopupCloseBtn.addEventListener("click", profilePopupClose);
 
 function profilePopupClose() {
-  profilePopup.classList.remove("popup_opened");
+  closePopup(profilePopup);
 }
 
 //Вызов события сохранить
@@ -77,19 +88,19 @@ profilePopupForm.addEventListener("submit", handleProfileFormSubmit);
 //Попап КАРТОЧЕК
 
 //Открыть попап
-cardPopupOpenBtn.addEventListener("click", cardPopupOpen);
+cardPopupOpenBtn.addEventListener("click", openCardPopup);
 
-function cardPopupOpen() {
-  cardPopup.classList.add("popup_opened");
+function openCardPopup() {
+  openPopup(cardPopup);
   cardPopupTitleInput.value = "";
   cardPopupUrlInput.value = "";
 }
 
 //Закрыть попап
-cardPopupCloseBtn.addEventListener("click", cardPopupClose);
+cardPopupCloseBtn.addEventListener("click", closeCardPopup);
 
-function cardPopupClose() {
-  cardPopup.classList.remove("popup_opened");
+function closeCardPopup() {
+  closePopup(cardPopup);
 }
 
 //Карточка
@@ -103,7 +114,7 @@ function createCard(item) {
 
   cardTitle.textContent = item.name || item;
   cardImage.src = item.link || item;
-  cardImage.alt = "Картинка достопримечательности";
+  cardImage.alt = item.name || item;
 
   //Лайк карточки
 
@@ -115,10 +126,10 @@ function createCard(item) {
 
   //Открыть Попап увеличение картинки
   cardImage.addEventListener("click", function () {
-    fullscreenImagePopup.classList.add("popup_opened");
+    openPopup(fullscreenImagePopup);
     cardPopupImageTitle.textContent = item.name || item;
     cardPopupImage.src = item.link || item;
-    cardPopupImage.alt = "Полноэкранная картинка достопримечательности";
+    cardPopupImage.alt = item.name || item;
   });
 
   //Удаление карточки
@@ -127,27 +138,27 @@ function createCard(item) {
   return cardItem;
 }
 
-/*Функция удаление карточки*/
+//Функция удаление карточки
 function removeCard(event) {
   const card = event.currentTarget.closest(".element");
 
   card.remove();
 }
 
-/*Зыкрыть Попап увеличение картинки*/
+//Зыкрыть Попап увеличение картинки
 fullscreenImagePopupCloseBtn.addEventListener(
   "click",
-  fullscreenImagePopupClose
+  closeFullscreenImagePopup
 );
-function fullscreenImagePopupClose() {
-  fullscreenImagePopup.classList.remove("popup_opened");
+function closeFullscreenImagePopup() {
+  closePopup(fullscreenImagePopup);
 }
 
 //Вызов события создать
 
 cardPopupForm.addEventListener("submit", addCard);
 
-/*Создание карточки*/
+//Создание карточки
 function addCard(event) {
   event.preventDefault();
 
@@ -159,7 +170,7 @@ function addCard(event) {
 
   event.currentTarget.reset();
 
-  cardPopupClose(cardPopup);
+  closeCardPopup(cardPopup);
 }
 
 //6 Карточек
