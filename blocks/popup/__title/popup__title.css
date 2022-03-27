@@ -6,7 +6,7 @@
   line-height: 22px;
   color: black;
   margin-top: 25px;
-  margin-bottom: 0;
+  margin-bottom: 75px;
   align-self: start;
   margin-left: 22px;
 }
@@ -17,5 +17,6 @@
     line-height: 29px;
     margin-top: 34px;
     margin-left: 36px;
+    margin-bottom: 54px;
   }
 }

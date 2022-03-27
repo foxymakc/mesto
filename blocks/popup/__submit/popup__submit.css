@@ -1,4 +1,4 @@
-.popup__sumbit{
+.popup__submit{
   max-width: 238px;
   width: 100%;
   height: 46px;
@@ -23,7 +23,7 @@
 }
 
 @media (min-width: 897px) {
-  .popup__sumbit {
+  .popup__submit {
     max-width: 358px;
     height: 50px;
     font-size: 18px;
@@ -33,6 +33,13 @@
   }
 }
 
-.popup__sumbit:hover {
+.popup__submit:hover {
   opacity: 0.8;
+}
+
+.popup__submit:disabled {
+  opacity: 0.2;
+  background-color: transparent;
+  color: black;
+  border: 1px solid #000000;
 }

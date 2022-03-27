@@ -45,19 +45,35 @@
       <div class="popup" id="popup">
         <form class="popup__container" name="popup__info">
           <h2 class="popup__title">Редактировать профиль</h2>
-          <input
-            class="popup__input popup__input_name"
-            type="text"
-            value="Жак-Ив Кусто"
-            name="name"
-          />
-          <input
-            class="popup__input popup__input_about-me"
-            type="text"
-            value="Исследователь океана"
-            name="about-me"
-          />
-          <button type="submit" class="popup__sumbit">Сохранить</button>
+          <fieldset class="popup__fieldset">
+            <div class="popup__field">
+              <input
+                class="popup__input popup__input_name"
+                type="text"
+                value="Жак-Ив Кусто"
+                name="name"
+                required
+                minlength="2"
+                maxlength="40"
+                id="popup-name"
+              />
+              <span class="popup__error" id="popup-name-error"></span>
+            </div>
+            <div class="popup__field">
+              <input
+                class="popup__input popup__input_about-me"
+                type="text"
+                value="Исследователь океана"
+                name="about-me"
+                required
+                minlength="2"
+                maxlength="200"
+                id="popup-aboutme"
+              />
+              <span class="popup__error" id="popup-aboutme-error"></span>
+            </div>
+            <button type="submit" class="popup__submit">Сохранить</button>
+          </fieldset>
           <button type="button" class="popup__close" id="popup_close"></button>
         </form>
       </div>
@@ -65,23 +81,35 @@
       <div class="popup" id="popup_element">
         <form class="popup__container" id="popup__element-info">
           <h2 class="popup__title">Новое место</h2>
-          <input
-            class="popup__input popup__input_title-element"
-            type="text"
-            placeholder="Название"
-            name="title-element"
-            id="title-element"
-          />
-          <input
-            class="popup__input popup__input_url-element"
-            type="url"
-            placeholder="Ссылка на картинку"
-            name="url-element"
-            id="url-element"
-          />
-          <button type="submit" class="popup__sumbit" id="popup_submit-elm">
-            Создать
-          </button>
+          <fieldset class="popup__fieldset">
+            <div class="popup__field">
+              <input
+                class="popup__input popup__input_title-element"
+                type="text"
+                placeholder="Название"
+                name="title-element"
+                required
+                minlength="2"
+                maxlength="30"
+                id="title-element"
+              />
+              <span class="popup__error" id="title-element-error"></span>
+            </div>
+            <div class="popup__field">
+              <input
+                class="popup__input popup__input_url-element"
+                type="url"
+                placeholder="Ссылка на картинку"
+                name="url-element"
+                required
+                id="url-element"
+              />
+              <span class="popup__error" id="url-element-error"></span>
+            </div>
+            <button type="submit" class="popup__submit" id="popup_submit-elm">
+              Создать
+            </button>
+          </fieldset>
           <button
             type="button"
             class="popup__close"
@@ -92,11 +120,7 @@
 
       <div class="popup" id="popup__element-image">
         <figure class="popup__container-image" id="popup_container-image">
-          <img
-            class="popup__image"
-            alt=" "
-            src=" "
-          />
+          <img class="popup__image" alt=" " src=" " />
           <figcaption class="popup__image-title"></figcaption>
           <button
             type="button"
@@ -108,11 +132,7 @@
 
       <template id="element-template">
         <div class="element">
-          <img
-            class="element__image"
-            alt=" "
-            src=" "
-          />
+          <img class="element__image" alt=" " src=" " />
           <div class="element__content">
             <h2 class="element__title"></h2>
             <button type="button" class="element__like"></button>
@@ -122,6 +142,7 @@
       </template>
     </div>
 
+    <script src="./scripts/validate.js"></script>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
