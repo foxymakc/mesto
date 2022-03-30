@@ -104,7 +104,7 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileTitle.textContent = profilePopupNameInput.value;
   profileSubtitle.textContent = profilePopupJobInput.value;
-  profilePopupClose(profilePopup); // Нормальное закрытие попапа
+  closeProfilePopup(profilePopup); // Нормальное закрытие попапа
 }
 
 profilePopupForm.addEventListener("submit", handleProfileFormSubmit);
