@@ -1,11 +1,12 @@
-import {fullscreenImagePopup, fullscreenImagePopupCloseBtn, cardPopupImage, cardPopupImageTitle, openPopup, closePopup} from './index.js';
+//import {fullscreenImagePopup, cardPopupImage, cardPopupImageTitle, openPopup} from './index.js';
 export default
 
 class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
   
   //Поиск карточки
@@ -36,12 +37,7 @@ class Card {
 
     // Открыть увеличение картинки
     this._item.querySelector(".element__image").addEventListener('click', () => {
-      this._handleOpenPopupFullImage()
-    });
-
-    // Закрыть увеличение картинки
-    fullscreenImagePopupCloseBtn.addEventListener('click', () => {
-      this._handleClosePopupFullImage()
+      this._handleCardClick(this._name, this._link)
     });
 
     //Удаление карточки
@@ -56,23 +52,8 @@ class Card {
     this._item.querySelector(".element__like").classList.toggle("element__like_active")
   }
 
-  //функция открытия увеличения картинки
-  _handleOpenPopupFullImage() {
-    openPopup(fullscreenImagePopup);
-      cardPopupImageTitle.textContent = this._name;
-      cardPopupImage.src = this._link;
-      cardPopupImage.alt = this._name;
-  }
-
-  //функция закрытия увеличения картинки
-  _handleClosePopupFullImage() {
-    closePopup(fullscreenImagePopup);
-  }
-
-
   //функция удаления карточки
   _handleRemoveCard() {
     this._item.closest(".element").remove()
   }
-
 }
