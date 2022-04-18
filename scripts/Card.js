@@ -1,4 +1,3 @@
-//import {fullscreenImagePopup, cardPopupImage, cardPopupImageTitle, openPopup} from './index.js';
 export default
 
 class Card {
