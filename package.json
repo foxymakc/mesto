@@ -1,0 +1,41 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "---\r ### *Проект 8 спринта курс Веб-програмист Яндекс практикум.*  \r Сайт посвящен теме *\"Путешествии\"*, в котором можно добавить свое имя и информацию о себе.\r На сайте есть возможность узнать где человек побывал или хочет побывать. Так же можно добавить картинку нового места.\r ### В проекте используются:  \r * Оформление по технологии БЭМ\r * Оформление блоков при помощи grid\r * Адаптация под несколько разрешений\r * Оформление блоков при помощи flex\r * Использование JS\r * Валидация форм\r * Использование ООП в интерфейсе\r * сборку проекта на webpack",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foxymakc/mesto.git"
+  },
+  "author": "Chelovskii Maxim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/foxymakc/mesto/issues"
+  },
+  "homepage": "https://github.com/foxymakc/mesto#readme",
+  "devDependencies": {
+    "@babel/core": "^7.17.10",
+    "@babel/preset-env": "^7.17.10",
+    "autoprefixer": "^10.4.5",
+    "babel-loader": "^8.2.5",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.1",
+    "cssnano": "^5.1.7",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.0",
+    "postcss": "^8.4.13",
+    "postcss-loader": "^6.2.1",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.8.1"
+  },
+  "browserslist": "last 4 version",
+  "dependencies": {
+    "core-js": "^3.22.3"
+  }
+}
