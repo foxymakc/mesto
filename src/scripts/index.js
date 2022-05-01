@@ -7,15 +7,11 @@ import  UserInfo  from '../components/UserInfo.js';
 
 const profilePopupOpenBtn = document.querySelector("#popup_show");
 const cardPopupOpenBtn = document.querySelector("#popup_element_show");
-const cardPopup = document.querySelector("#popup_element");
 const profilePopupNameInput = document.querySelector(".popup__input_name");
 const profilePopupJobInput = document.querySelector(".popup__input_about-me");
 const profilePopupForm = document.querySelector(".popup__container");
-const cardsList = document.querySelector(".elements");
 const cardPopupImage = document.querySelector(".popup__image");
 const cardPopupImageTitle = document.querySelector(".popup__image-title");
-const cardPopupTitleInput = document.querySelector(".popup__input_title-element");
-const cardPopupUrlInput = document.querySelector(".popup__input_url-element");
 const cardPopupForm = document.querySelector("#popup__element-info");
 
 const initialCards = [
@@ -79,11 +75,9 @@ validatorProfilePopupForm.enableValidation();
 
 //Попап КАРТОЧЕК
 cardPopupOpenBtn.addEventListener("click", () => {
- validatorCardPopupForm.checkValidationOpenPopup();
  handleCardFormSubmit.open();
-}
-);
-
+ validatorCardPopupForm.checkValidationOpenPopup();
+});
 
 //Добавление новой карточки
 const handleCardFormSubmit = new PopupWithForm("#popup_element", newCard => {
@@ -113,8 +107,8 @@ const createCard = (data) => {
       cardPopupImage.alt = name;
       popupCardClick.open(data.name , data.link)
     },
-    data: data
-  }, '#element-template')
+    data: data},
+  '#element-template');
   return card
 }
 
@@ -125,7 +119,7 @@ const cardRenderer = new Section({
   renderer: (item) => {
     const card = createCard(item);
     const cardElement = card.generateCard();
-    cardRenderer.addItem(cardElement);
-  }}, ".elements");
+    cardRenderer.addItem(cardElement);}},
+  ".elements");
 
   cardRenderer.rendererItems();
