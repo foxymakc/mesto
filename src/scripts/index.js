@@ -84,7 +84,7 @@ cardPopupOpenBtn.addEventListener("click", () => {
 
 //Добавление новой карточки
 const handleCardFormSubmit = new PopupWithForm("#popup_element", (newCard) => {
-  createCard(newCard);
+  cardRenderer.addItem(createCard(newCard)); 
 });
 
 handleCardFormSubmit.setEventListeners();
@@ -111,9 +111,7 @@ const createCard = (data) => {
     },
     "#element-template"
   );
-  const cardElement = card.generateCard();
-  cardRenderer.addItem(cardElement);
-  return card;
+  return card.generateCard(); 
 };
 
 // Отображение карточек
@@ -121,7 +119,7 @@ const cardRenderer = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      createCard(item);
+      cardRenderer.addItem(createCard(item)); 
     },
   },
   ".elements"
