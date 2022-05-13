@@ -54,7 +54,10 @@ module.exports = {
     devServer: {
         compress: true,
         port: 8080,
-        open: true
+        open: true,
+        static: {
+            directory: path.join(__dirname, "./dist"),
+           },
     },
     devtool: 'inline-source-map',
 };  

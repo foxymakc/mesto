@@ -6,6 +6,8 @@ import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import "../pages/index.css";
 
+const avatarPopupOpenBtn = document.querySelector("#avatar-edit-button");
+const avatarPopupForm = document.querySelector("#popup__avatar-info");
 const profilePopupOpenBtn = document.querySelector("#popup_show");
 const cardPopupOpenBtn = document.querySelector("#popup_element_show");
 const profilePopupNameInput = document.querySelector(".popup__input_name");
@@ -49,10 +51,30 @@ const settingsValidator = {
   errorClass: "popup__error",
 };
 
+//Попап АВАТАР-профиля
+avatarPopupOpenBtn.addEventListener("click", () => {
+  handleAvatarFormSubmit.open();
+  validatorAvatarPopupForm.checkValidationOpenPopup();
+});
+
+const handleAvatarFormSubmit = new PopupWithForm("#popup_avatar", (newAvatar) => {
+  userInfo.setUserAvatar(newAvatar);
+});
+
+handleAvatarFormSubmit.setEventListeners();
+
+const validatorAvatarPopupForm = new FormValidator(
+  avatarPopupForm,
+  settingsValidator
+);
+validatorAvatarPopupForm.enableValidation();
+
+
 //Попап ПРОФИЛЯ
 const userInfo = new UserInfo({
   selectorProfilePopupName: ".profile__title",
   selectorProfilePopupJob: ".profile__subtitle",
+  selectorAvatarPopup: ".profile__avatar"
 });
 userInfo.getUserInfo();
 

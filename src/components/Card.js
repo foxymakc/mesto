@@ -50,10 +50,8 @@ export default class Card {
 
   //Функция лайк карточки
   _handleLikeCard() {
-    this._item
-      .querySelector(".element__like")
-      .classList.toggle("element__like_active");
-  }
+    this._item.querySelector(".element__like").classList.toggle("element__like_active");
+    }
 
   //функция удаления карточки
   _handleRemoveCard() {

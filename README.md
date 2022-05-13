@@ -1,5 +1,5 @@
 # Mesto
-# GitHub Pages: https://foxymakc.github.io/mesto/index.html
+# GitHub Pages: https://foxymakc.github.io/mesto
 ---
 ### *Проект 8 спринта курс Веб-програмист Яндекс практикум.*  
 Сайт посвящен теме *"Путешествии"*, в котором можно добавить свое имя и информацию о себе.

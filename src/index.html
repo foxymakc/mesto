@@ -13,11 +13,16 @@
 
       <main>
         <section class="profile">
+          <div class="profile__avatar-box">
           <img
             class="profile__avatar"
             src="<%=require('./images/avatar.jpg')%>"
             alt="Аватарка"
           />
+          <button type="button"
+          class="profile__avatar-edit-button"
+          id="avatar-edit-button"></button>
+          </div>
           <div class="profile__info">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
             <button
@@ -71,7 +76,7 @@
               />
               <span class="popup__error" id="popup-aboutme-error"></span>
             </div>
-            <button type="submit" class="popup__submit">Сохранить</button>
+            <button type="submit" class="popup__submit" data-waiting-text="Сохренение...">Сохранить</button>
           </fieldset>
           <button type="button" class="popup__close" id="popup_close"></button>
         </form>
@@ -105,7 +110,7 @@
               />
               <span class="popup__error" id="url-element-error"></span>
             </div>
-            <button type="submit" class="popup__submit" id="popup_submit-elm">
+            <button type="submit" class="popup__submit" id="popup_submit-elm" data-waiting-text="Создание...">
               Создать
             </button>
           </fieldset>
@@ -129,12 +134,56 @@
         </figure>
       </div>
 
+      <div class="popup" id="popup_avatar">
+        <form class="popup__container" id="popup__avatar-info">
+          <h2 class="popup__title">Обновить аватар</h2>
+          <fieldset class="popup__fieldset">
+            <div class="popup__field">
+              <input
+                class="popup__input popup__input_url-element"
+                type="url"
+                placeholder="Ссылка на картинку"
+                name="linkAvatar"
+                required
+                id="url-avatar"
+              />
+              <span class="popup__error" id="url-avatar-error"></span>
+            </div>
+            <button type="submit" class="popup__submit" id="popup_submit-avatar" data-waiting-text="Сохранение...">
+              Сохранить
+            </button>
+          </fieldset>
+          <button
+            type="button"
+            class="popup__close"
+            id="popup_close-avatar"
+          ></button>
+        </form>
+      </div>
+
+      <div class="popup" id="popup_delete-card">
+        <form class="popup__container" id="popup_form-delete-card">
+          <h2 class="popup__title">Вы уверены?</h2>
+            <button type="submit" class="popup__submit" id="popup_submit-delete-card">
+              Да
+            </button>
+        </form>
+          <button
+            type="button"
+            class="popup__close"
+            id="popup_close-delete-card"
+          ></button>
+      </div>
+
       <template id="element-template">
         <div class="element">
           <img class="element__image" alt=" " src=" " />
           <div class="element__content">
             <h2 class="element__title"></h2>
-            <button type="button" class="element__like"></button>
+            <div class="element__like-box">
+              <button type="button" class="element__like"></button>
+              <span class="element__like-number">0</span>
+            </div>
           </div>
           <button type="button" class="element__delete"></button>
         </div>
