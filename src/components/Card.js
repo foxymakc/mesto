@@ -1,9 +1,10 @@
 export default class Card {
-  constructor({ handleCardClick, data }, cardSelector) {
+  constructor({ handleCardClick, handleRetentionDelete, data }, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleRetentionDelete = handleRetentionDelete;
   }
 
   //Поиск карточки
@@ -44,17 +45,29 @@ export default class Card {
     this._item
       .querySelector(".element__delete")
       .addEventListener("click", () => {
-        this._handleRemoveCard();
+        this._handleRetentionDelete();
       });
   }
 
   //Функция лайк карточки
   _handleLikeCard() {
-    this._item.querySelector(".element__like").classList.toggle("element__like_active");
+    const likeBtn = this._item.querySelector(".element__like");
+    const numderLike = this._item.querySelector(".element__like-number");
+    let counter = 0;
+    const renderCounter = (counter, numderLike) => numderLike.innerText = counter;
+
+    if (!likeBtn.classList.contains('element__like_active')) {
+      likeBtn.classList.add('element__like_active');
+      renderCounter(++counter, numderLike);
+    } else {
+      likeBtn.classList.remove('element__like_active');
+      renderCounter(counter = '', numderLike);
+    }
+    
     }
 
   //функция удаления карточки
-  _handleRemoveCard() {
+  handleRemoveCard() {
     this._item.closest(".element").remove();
     this._item = null;
   }

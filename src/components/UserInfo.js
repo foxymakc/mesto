@@ -12,10 +12,9 @@ export default class UserInfo {
     };
   }
 
-  setUserInfo({ userName, job, linkAvatar }) {
+  setUserInfo({ userName, job}) {
     this._profilePopupName.textContent = userName;
     this._profilePopupJob.textContent = job;
-    this.setUserAvatar(linkAvatar);
   }
 
   setUserAvatar({linkAvatar}) {

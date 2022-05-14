@@ -4,6 +4,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import "../pages/index.css";
 
 const avatarPopupOpenBtn = document.querySelector("#avatar-edit-button");
@@ -55,10 +56,12 @@ const settingsValidator = {
 avatarPopupOpenBtn.addEventListener("click", () => {
   handleAvatarFormSubmit.open();
   validatorAvatarPopupForm.checkValidationOpenPopup();
+  handleAvatarFormSubmit.renderRetention(false);
 });
 
 const handleAvatarFormSubmit = new PopupWithForm("#popup_avatar", (newAvatar) => {
   userInfo.setUserAvatar(newAvatar);
+  handleAvatarFormSubmit.renderRetention(true);
 });
 
 handleAvatarFormSubmit.setEventListeners();
@@ -84,9 +87,11 @@ profilePopupOpenBtn.addEventListener("click", () => {
   profilePopupJobInput.value = profileInfo.job;
   validatorProfilePopupForm.checkValidationOpenPopup();
   handleProfileFormSubmit.open();
+  handleProfileFormSubmit.renderRetention(false);
 });
 
 const handleProfileFormSubmit = new PopupWithForm("#popup", (newProfile) => {
+  handleProfileFormSubmit.renderRetention(true);
   userInfo.setUserInfo(newProfile);
 });
 
@@ -102,11 +107,13 @@ validatorProfilePopupForm.enableValidation();
 cardPopupOpenBtn.addEventListener("click", () => {
   handleCardFormSubmit.open();
   validatorCardPopupForm.checkValidationOpenPopup();
+  handleCardFormSubmit.renderRetention(false);
 });
 
 //Добавление новой карточки
 const handleCardFormSubmit = new PopupWithForm("#popup_element", (newCard) => {
-  cardRenderer.addItem(createCard(newCard)); 
+  cardRenderer.addItem(createCard(newCard));
+  handleCardFormSubmit.renderRetention(true);
 });
 
 handleCardFormSubmit.setEventListeners();
@@ -119,8 +126,11 @@ validatorCardPopupForm.enableValidation();
 
 //Увеличение карточки
 const popupCardClick = new PopupWithImage("#popup__element-image");
-
 popupCardClick.setEventListeners();
+
+//Попап удаление карточки
+const popupDeleteCard = new PopupWithConfirmation("#popup_delete-card");
+popupDeleteCard.setEventListeners();
 
 //Создание карточки
 const createCard = (data) => {
@@ -128,6 +138,13 @@ const createCard = (data) => {
     {
       handleCardClick: () => {
         popupCardClick.open(data.name, data.link);
+      },
+      handleRetentionDelete: () => {
+        popupDeleteCard.setSubmitAction ( ()=> {
+          card.handleRemoveCard();
+          popupDeleteCard.close();
+        })
+        popupDeleteCard.open()
       },
       data: data,
     },
