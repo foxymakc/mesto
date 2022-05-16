@@ -6,8 +6,8 @@ export default class PopupWithForm extends Popup {
     this._callbackSabmitForm = callbackSabmitForm;
     this._formElement = this._element.querySelector(".popup__container");
     this._inputList = this._formElement.querySelectorAll(".popup__input");
-    this._popupBtn = this._formElement.querySelector('.popup__submit')
-    this._popupBtnText = this._popupBtn.textContent
+    this._popupBtn = this._formElement.querySelector(".popup__submit");
+    this._popupBtnText = this._popupBtn.textContent;
   }
 
   close() {
@@ -34,8 +34,8 @@ export default class PopupWithForm extends Popup {
   }
 
   renderRetention(isLoading) {
-    if(isLoading) {
-      this._popupBtn.textContent = 'Сохранение...';
+    if (isLoading) {
+      this._popupBtn.textContent = "Сохранение...";
     } else {
       this._popupBtn.textContent = this._popupBtnText;
     }

@@ -41,9 +41,9 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(png|svg|jpg|gif|woff(2)?)|eot|ttf|otf$/,
-                type: 'asset/resource'
-            },
+                test: /\.(png|svg|jpg|gif|woff(2)?)|eot|ttf|otf/,
+                type: "asset/resource",
+              },
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
@@ -56,7 +56,7 @@ module.exports = {
         port: 8080,
         open: true,
         static: {
-            directory: path.join(__dirname, "./dist"),
+            directory: path.resolve(__dirname, "./dist"),
            },
     },
     devtool: 'inline-source-map',

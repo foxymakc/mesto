@@ -5,6 +5,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
+import Api from "../components/Api.js";
 import "../pages/index.css";
 
 const avatarPopupOpenBtn = document.querySelector("#avatar-edit-button");
@@ -52,6 +53,26 @@ const settingsValidator = {
   errorClass: "popup__error",
 };
 
+const api = new Api({
+  url: "https://mesto.nomoreparties.co/v1/cohort-41",
+  headers: {
+    authorization: "240299ab-5d52-47c4-861f-e301564a80f2",
+    "Content-Type": "application/json",
+  },
+});
+
+let userId;
+
+api
+  .getInformation()
+  .then(([res, cards]) => {
+    userInfo.setUserAvatar(res.avatar);
+    userInfo.setUserInfo(res.name, res.about);
+    userId = res._id;
+    cardRenderer.rendererItems(cards);
+  })
+  .catch((err) => console.log(err));
+
 //Попап АВАТАР-профиля
 avatarPopupOpenBtn.addEventListener("click", () => {
   handleAvatarFormSubmit.open();
@@ -59,10 +80,18 @@ avatarPopupOpenBtn.addEventListener("click", () => {
   handleAvatarFormSubmit.renderRetention(false);
 });
 
-const handleAvatarFormSubmit = new PopupWithForm("#popup_avatar", (newAvatar) => {
-  userInfo.setUserAvatar(newAvatar);
-  handleAvatarFormSubmit.renderRetention(true);
-});
+const handleAvatarFormSubmit = new PopupWithForm(
+  "#popup_avatar",
+  (newAvatar) => {
+    handleAvatarFormSubmit.renderRetention(true);
+    api
+      .handleAvatar(newAvatar)
+      .then((res) => {
+        userInfo.setUserAvatar(res.avatar);
+      })
+      .catch((err) => console.log(err));
+  }
+);
 
 handleAvatarFormSubmit.setEventListeners();
 
@@ -72,12 +101,11 @@ const validatorAvatarPopupForm = new FormValidator(
 );
 validatorAvatarPopupForm.enableValidation();
 
-
 //Попап ПРОФИЛЯ
 const userInfo = new UserInfo({
   selectorProfilePopupName: ".profile__title",
   selectorProfilePopupJob: ".profile__subtitle",
-  selectorAvatarPopup: ".profile__avatar"
+  selectorAvatarPopup: ".profile__avatar",
 });
 userInfo.getUserInfo();
 
@@ -92,7 +120,12 @@ profilePopupOpenBtn.addEventListener("click", () => {
 
 const handleProfileFormSubmit = new PopupWithForm("#popup", (newProfile) => {
   handleProfileFormSubmit.renderRetention(true);
-  userInfo.setUserInfo(newProfile);
+  api
+    .handleUserInfoApi(newProfile)
+    .then((res) => {
+      userInfo.setUserInfo(res.name, res.about);
+    })
+    .catch((err) => console.log(err));
 });
 
 handleProfileFormSubmit.setEventListeners();
@@ -112,8 +145,13 @@ cardPopupOpenBtn.addEventListener("click", () => {
 
 //Добавление новой карточки
 const handleCardFormSubmit = new PopupWithForm("#popup_element", (newCard) => {
-  cardRenderer.addItem(createCard(newCard));
   handleCardFormSubmit.renderRetention(true);
+  api
+    .handleAddCard(newCard)
+    .then((res) => {
+      cardRenderer.addItem(createCard(res));
+    })
+    .catch((err) => console.log(err));
 });
 
 handleCardFormSubmit.setEventListeners();
@@ -139,29 +177,33 @@ const createCard = (data) => {
       handleCardClick: () => {
         popupCardClick.open(data.name, data.link);
       },
-      handleRetentionDelete: () => {
-        popupDeleteCard.setSubmitAction ( ()=> {
-          card.handleRemoveCard();
-          popupDeleteCard.close();
-        })
-        popupDeleteCard.open()
+      handleDeleteCard: () => {
+        popupDeleteCard.setSubmitAction(() => {
+          api
+            .deleteCard(data._id)
+            .then(() => {
+              card.handleRemoveCard();
+              popupDeleteCard.close();
+            })
+            .catch((err) => console.log(err));
+        });
+        popupDeleteCard.open();
       },
       data: data,
     },
-    "#element-template"
+    "#element-template",
+    userId,
+    api
   );
-  return card.generateCard(); 
+  return card.generateCard();
 };
 
 // Отображение карточек
 const cardRenderer = new Section(
   {
-    items: initialCards,
     renderer: (item) => {
-      cardRenderer.addItem(createCard(item)); 
+      cardRenderer.addItem(createCard(item));
     },
   },
   ".elements"
 );
-
-cardRenderer.rendererItems();

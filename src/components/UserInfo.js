@@ -1,5 +1,9 @@
 export default class UserInfo {
-  constructor({ selectorProfilePopupName, selectorProfilePopupJob, selectorAvatarPopup }) {
+  constructor({
+    selectorProfilePopupName,
+    selectorProfilePopupJob,
+    selectorAvatarPopup,
+  }) {
     this._profilePopupName = document.querySelector(selectorProfilePopupName);
     this._profilePopupJob = document.querySelector(selectorProfilePopupJob);
     this._profilePopupAvatar = document.querySelector(selectorAvatarPopup);
@@ -12,12 +16,12 @@ export default class UserInfo {
     };
   }
 
-  setUserInfo({ userName, job}) {
+  setUserInfo(userName, job) {
     this._profilePopupName.textContent = userName;
     this._profilePopupJob.textContent = job;
   }
 
-  setUserAvatar({linkAvatar}) {
-    this._profilePopupAvatar.src = linkAvatar;
+  setUserAvatar(avatar) {
+    this._profilePopupAvatar.src = avatar;
   }
 }
