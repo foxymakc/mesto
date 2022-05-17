@@ -29,7 +29,6 @@ export default class PopupWithForm extends Popup {
       event.preventDefault();
 
       this._callbackSabmitForm(this._getInputValues());
-      this.close();
     });
   }
 

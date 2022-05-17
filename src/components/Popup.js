@@ -25,7 +25,7 @@ export default class Popup {
 
   //Слушатели клика закрыть
   setEventListeners() {
-    this._element.addEventListener("click", (e) => {
+    this._element.addEventListener("mousedown", (e) => {
       if (
         !(
           e.target === this._element ||

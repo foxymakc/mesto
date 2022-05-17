@@ -4,7 +4,7 @@ export default class Api {
     this._headers = config.headers;
   }
 
-  _errorProcessing(res) {
+  _checkResponse(res) {
     if (res.ok) {
       return res.json();
     }
@@ -18,14 +18,14 @@ export default class Api {
       body: JSON.stringify({
         avatar: data.avatar,
       }),
-    }).then(this._errorProcessing);
+    }).then(this._checkResponse);
   }
 
   getUserInfo() {
     return fetch(this._url + "/users/me", {
       method: "GET",
       headers: this._headers,
-    }).then(this._errorProcessing);
+    }).then(this._checkResponse);
   }
 
   handleUserInfoApi(data) {
@@ -36,14 +36,14 @@ export default class Api {
         name: data.userName,
         about: data.job,
       }),
-    }).then(this._errorProcessing);
+    }).then(this._checkResponse);
   }
 
   getInitialCards() {
     return fetch(this._url + "/cards", {
       method: "GET",
       headers: this._headers,
-    }).then(this._errorProcessing);
+    }).then(this._checkResponse);
   }
 
   handleAddCard(data) {
@@ -54,7 +54,7 @@ export default class Api {
         name: data.name,
         link: data.link,
       }),
-    }).then(this._errorProcessing);
+    }).then(this._checkResponse);
   }
 
   getInformation() {
@@ -65,20 +65,20 @@ export default class Api {
     return fetch(this._url + `/cards/${id}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then(this._errorProcessing);
+    }).then(this._checkResponse);
   }
 
   likeCard(id) {
     return fetch(this._url + `/cards/likes/${id}`, {
       method: "PUT",
       headers: this._headers,
-    }).then(this._errorProcessing);
+    }).then(this._checkResponse);
   }
 
   disLikeCard(id) {
     return fetch(this._url + `/cards/likes/${id}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then(this._errorProcessing);
+    }).then(this._checkResponse);
   }
 }

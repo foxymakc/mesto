@@ -1,3 +1,4 @@
+import "../pages/index.css";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -6,52 +7,14 @@ import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import Api from "../components/Api.js";
-import "../pages/index.css";
-
-const avatarPopupOpenBtn = document.querySelector("#avatar-edit-button");
-const avatarPopupForm = document.querySelector("#popup__avatar-info");
-const profilePopupOpenBtn = document.querySelector("#popup_show");
-const cardPopupOpenBtn = document.querySelector("#popup_element_show");
-const profilePopupNameInput = document.querySelector(".popup__input_name");
-const profilePopupJobInput = document.querySelector(".popup__input_about-me");
-const profilePopupForm = document.querySelector(".popup__container");
-const cardPopupForm = document.querySelector("#popup__element-info");
-
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
-
-const settingsValidator = {
-  formSelector: ".popup__container",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__submit",
-  inactiveButtonClass: "popup__submit_inactive",
-  inputErrorClass: "popup__input_error-active",
-  errorClass: "popup__error",
-};
+import {
+  avatarPopupOpenBtn,
+  profilePopupOpenBtn,
+  cardPopupOpenBtn,
+  profilePopupNameInput,
+  profilePopupJobInput,
+  settingsValidator,
+} from "../utils/constans.js";
 
 const api = new Api({
   url: "https://mesto.nomoreparties.co/v1/cohort-41",
@@ -76,8 +39,7 @@ api
 //Попап АВАТАР-профиля
 avatarPopupOpenBtn.addEventListener("click", () => {
   handleAvatarFormSubmit.open();
-  validatorAvatarPopupForm.checkValidationOpenPopup();
-  handleAvatarFormSubmit.renderRetention(false);
+  formValidators["popup__avatar-form"].checkValidationOpenPopup();
 });
 
 const handleAvatarFormSubmit = new PopupWithForm(
@@ -88,18 +50,14 @@ const handleAvatarFormSubmit = new PopupWithForm(
       .handleAvatar(newAvatar)
       .then((res) => {
         userInfo.setUserAvatar(res.avatar);
+        handleAvatarFormSubmit.close();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => handleAvatarFormSubmit.renderRetention(false));
   }
 );
 
 handleAvatarFormSubmit.setEventListeners();
-
-const validatorAvatarPopupForm = new FormValidator(
-  avatarPopupForm,
-  settingsValidator
-);
-validatorAvatarPopupForm.enableValidation();
 
 //Попап ПРОФИЛЯ
 const userInfo = new UserInfo({
@@ -113,9 +71,9 @@ profilePopupOpenBtn.addEventListener("click", () => {
   const profileInfo = userInfo.getUserInfo();
   profilePopupNameInput.value = profileInfo.userName;
   profilePopupJobInput.value = profileInfo.job;
-  validatorProfilePopupForm.checkValidationOpenPopup();
+
+  formValidators["popup__info"].checkValidationOpenPopup();
   handleProfileFormSubmit.open();
-  handleProfileFormSubmit.renderRetention(false);
 });
 
 const handleProfileFormSubmit = new PopupWithForm("#popup", (newProfile) => {
@@ -124,23 +82,18 @@ const handleProfileFormSubmit = new PopupWithForm("#popup", (newProfile) => {
     .handleUserInfoApi(newProfile)
     .then((res) => {
       userInfo.setUserInfo(res.name, res.about);
+      handleProfileFormSubmit.close();
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally(() => handleProfileFormSubmit.renderRetention(false));
 });
 
 handleProfileFormSubmit.setEventListeners();
 
-const validatorProfilePopupForm = new FormValidator(
-  profilePopupForm,
-  settingsValidator
-);
-validatorProfilePopupForm.enableValidation();
-
 //Попап КАРТОЧЕК
 cardPopupOpenBtn.addEventListener("click", () => {
   handleCardFormSubmit.open();
-  validatorCardPopupForm.checkValidationOpenPopup();
-  handleCardFormSubmit.renderRetention(false);
+  formValidators["popup__element-form"].checkValidationOpenPopup();
 });
 
 //Добавление новой карточки
@@ -150,17 +103,13 @@ const handleCardFormSubmit = new PopupWithForm("#popup_element", (newCard) => {
     .handleAddCard(newCard)
     .then((res) => {
       cardRenderer.addItem(createCard(res));
+      handleCardFormSubmit.close();
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally(() => handleCardFormSubmit.renderRetention(false));
 });
 
 handleCardFormSubmit.setEventListeners();
-
-const validatorCardPopupForm = new FormValidator(
-  cardPopupForm,
-  settingsValidator
-);
-validatorCardPopupForm.enableValidation();
 
 //Увеличение карточки
 const popupCardClick = new PopupWithImage("#popup__element-image");
@@ -207,3 +156,22 @@ const cardRenderer = new Section(
   },
   ".elements"
 );
+
+//Валидация
+const formValidators = {};
+
+const enableValidation = (settingsValidator) => {
+  const formList = Array.from(
+    document.querySelectorAll(settingsValidator.formSelector)
+  );
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(formElement, settingsValidator);
+    // получаем данные из атрибута `name` у формы
+    const formName = formElement.getAttribute("name");
+
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(settingsValidator);

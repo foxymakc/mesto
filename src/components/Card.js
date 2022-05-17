@@ -33,6 +33,8 @@ export default class Card {
     this._item.querySelector(".element__title").textContent = this._name;
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
+    this._likeBtn = this._item.querySelector(".element__like");
+    this._likeNumder = this._item.querySelector(".element__like-number");
     this._item.querySelector(".element__like-number").textContent =
       this._likes.length;
 
@@ -82,23 +84,20 @@ export default class Card {
 
   //Функция лайк карточки
   _handleLikeCard() {
-    const likeBtn = this._item.querySelector(".element__like");
-    const likeNumder = this._item.querySelector(".element__like-number");
-
-    if (!likeBtn.classList.contains("element__like_active")) {
+    if (!this._likeBtn.classList.contains("element__like_active")) {
       this._api
         .likeCard(this._idCard)
         .then((res) => {
-          likeBtn.classList.add("element__like_active");
-          likeNumder.textContent = res.likes.length;
+          this._likeBtn.classList.add("element__like_active");
+          this._likeNumder.textContent = res.likes.length;
         })
         .catch((err) => console.log(err));
     } else {
       this._api
         .disLikeCard(this._idCard)
         .then((res) => {
-          likeBtn.classList.remove("element__like_active");
-          likeNumder.textContent = res.likes.length;
+          this._likeBtn.classList.remove("element__like_active");
+          this._likeNumder.textContent = res.likes.length;
         })
         .catch((err) => console.log(err));
     }
